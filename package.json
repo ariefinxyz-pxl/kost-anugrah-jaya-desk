@@ -1,0 +1,34 @@
+{
+  "name": "kost-anugrah-jaya",
+  "version": "1.0.0",
+  "description": "Kost Anugrah Jaya - aplikasi desktop",
+  "author": "Kost Anugrah Jaya",
+  "main": "main.js",
+  "scripts": {
+    "prepare-assets": "node -e \"require('fs').copyFileSync('node_modules/xlsx/dist/xlsx.full.min.js','app/xlsx.full.min.js')\"",
+    "start": "npm run prepare-assets && electron .",
+    "dist": "npm run prepare-assets && electron-builder --win --x64 --publish never"
+  },
+  "dependencies": {
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.anugrahjaya.kost.desktop",
+    "productName": "Kost Anugrah Jaya",
+    "files": ["main.js", "preload.js", "app/**/*", "build/icon.png"],
+    "win": {
+      "icon": "build/icon.png",
+      "target": ["portable", "nsis"]
+    },
+    "portable": { "artifactName": "KostAnugrahJaya-Portable-${version}.exe" },
+    "nsis": {
+      "artifactName": "KostAnugrahJaya-Setup-${version}.exe",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
